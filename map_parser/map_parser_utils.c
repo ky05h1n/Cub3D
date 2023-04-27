@@ -6,7 +6,7 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:04:40 by enja              #+#    #+#             */
-/*   Updated: 2023/04/26 14:50:49 by enja             ###   ########.fr       */
+/*   Updated: 2023/04/27 17:39:19 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	tdm(char **arr)
 {
 	int	a;
 
-	if (arr[0] == NULL)
+	if (!arr || arr[0] == NULL)
 		return (0);
 	a = 0;
 	while (arr[a] != NULL)
@@ -72,4 +72,39 @@ char	**get_tab(char **cmd_table, char *newcmd)
 	newtable[i] = NULL;
 	free(cmd_table);
 	return (newtable);
+}
+
+t_sides	*init_data_null(t_sides *sides)
+{
+	sides->ea = NULL;
+	sides->no = NULL;
+	sides->so = NULL;
+	sides->we = NULL;
+	sides->c = NULL;
+	sides->f = NULL;
+	return (sides);
+}
+
+void	check_extention(char *path, int sig)
+{
+	int		size;
+	int		i;
+	char	*ext;
+
+	if (sig == 1)
+		ext = ".cub";
+	else if (sig == 2)
+		ext = ".xpm";
+	size = ft_strlen(path) - 1;
+	i = 3;
+	while (i >= 0)
+	{
+		if (ext[i] == path[size])
+		{
+			i--;
+			size--;
+		}
+		else
+			error_msg(2);
+	}
 }

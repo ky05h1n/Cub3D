@@ -6,7 +6,7 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 19:42:19 by enja              #+#    #+#             */
-/*   Updated: 2023/04/26 20:25:10 by enja             ###   ########.fr       */
+/*   Updated: 2023/04/27 17:48:54 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,12 @@ char	**get_map(char **av)
 	char	**tab;
 	int		fd;
 	int		count;
-	//int		i;
 
 	count = 0;
-	//i = 0;
 	tab = NULL;
-	fd = open(av[1], O_RDWR);
+	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
-	{
-		printf("no such file\n");
-		exit(1);
-	}
+		error_msg(3);
 	str = get_next_line(fd);
 	while (str)
 	{
@@ -44,47 +39,32 @@ char	**get_map(char **av)
 		}
 		str = get_next_line(fd);
 	}
-	// while (tab[i])
-	// 	printf("%s\n", tab[i++]);
 	return (tab);
 }
 
 void	error_msg(int sig)
 {
 	if (sig == 1)
-		printf("few argument\n");
+		printf("Few Or Many Arguments !\n");
 	if (sig == 2)
-		printf("wrong extention\n");
+		printf("Wrong Extention !\n");
+	if (sig == 3)
+		printf("No Such Map File !\n");
+	if (sig == 4)
+		printf("Map Data Error !\n");
 	exit(1);
 }
 
 void	parameter_analyzer(int ac, char **av)
 {
-	char	*ext;
-	int		size;
-	int		i;
-
 	if (ac != 2)
 		error_msg(1);
-	ext = ".cub";
-	size = ft_strlen(av[1]) - 1;
-	i = 3;
-	while (i >= 0)
-	{
-		if (ext[i] == av[1][size])
-		{
-			i--;
-			size--;
-		}
-		else
-			error_msg(2);
-	}
+	check_extention(av[1], 1);
 }
 
 int	main(int ac, char **av)
 {
 	char **tab;
-
 	parameter_analyzer(ac, av);
 	tab = get_map(av);
 	pars_data(tab);
