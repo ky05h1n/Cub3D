@@ -6,11 +6,23 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 19:42:19 by enja              #+#    #+#             */
-/*   Updated: 2023/04/27 17:48:54 by enja             ###   ########.fr       */
+/*   Updated: 2023/04/28 21:41:03 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/includes.h"
+
+int	check_num(int c)
+{
+	printf("- >> %c\n", c);
+	if (c >= '0' && c <= '9')
+		return (1);
+	else
+	{
+		error_msg(4);
+		return (0);
+	}
+}
 
 char	**get_map(char **av)
 {
@@ -32,7 +44,6 @@ char	**get_map(char **av)
 			if (count < 6)
 			{
 				str = ft_strtrim(str, "\n");
-				str = manage_spaces(str);
 				count++;
 			}
 			tab = get_tab(tab, str);
@@ -64,7 +75,8 @@ void	parameter_analyzer(int ac, char **av)
 
 int	main(int ac, char **av)
 {
-	char **tab;
+	char	**tab;
+
 	parameter_analyzer(ac, av);
 	tab = get_map(av);
 	pars_data(tab);
