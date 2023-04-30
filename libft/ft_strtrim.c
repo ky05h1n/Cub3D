@@ -6,13 +6,13 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 21:04:57 by enja              #+#    #+#             */
-/*   Updated: 2021/12/02 18:25:47 by enja             ###   ########.fr       */
+/*   Updated: 2023/04/30 16:34:39 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*zy_extract(char const *s, int start, int len)
+static char	*zy_extract(char *s, int start, int len)
 {
 	char	*dst;
 	int		a;
@@ -26,10 +26,11 @@ static char	*zy_extract(char const *s, int start, int len)
 		dst[a++] = s[start++];
 	}
 		dst[a] = '\0';
+	free(s);
 	return (dst);
 }
 
-static int	zy_begtrim(const char *str, const char *trm)
+static int	zy_begtrim(char *str, char *trm)
 {
 	int	aix;
 	int	i;
@@ -50,7 +51,7 @@ static int	zy_begtrim(const char *str, const char *trm)
 	return (i);
 }
 
-char	*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char *s1, char *set)
 {
 	int		aix;
 	int		bix;

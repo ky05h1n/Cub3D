@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parser_utils.c                                 :+:      :+:    :+:   */
+/*   elm_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:04:40 by enja              #+#    #+#             */
-/*   Updated: 2023/04/27 17:39:19 by enja             ###   ########.fr       */
+/*   Updated: 2023/04/30 18:40:09 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,17 @@ char	**get_tab(char **cmd_table, char *newcmd)
 	return (newtable);
 }
 
-t_sides	*init_data_null(t_sides *sides)
+t_elements	*init_data_null(t_elements *elmnt, t_side_f *f, t_side_c *c)
 {
-	sides->ea = NULL;
-	sides->no = NULL;
-	sides->so = NULL;
-	sides->we = NULL;
-	sides->c = NULL;
-	sides->f = NULL;
-	return (sides);
+	elmnt->ea = NULL;
+	elmnt->no = NULL;
+	elmnt->so = NULL;
+	elmnt->we = NULL;
+	elmnt->c = NULL;
+	elmnt->f = NULL;
+	elmnt->sid_f = f;
+	elmnt->sid_c = c;
+	return (elmnt);
 }
 
 void	check_extention(char *path, int sig)
@@ -105,6 +107,10 @@ void	check_extention(char *path, int sig)
 			size--;
 		}
 		else
+		{
+			if (sig == 2)
+				free(path);
 			error_msg(2);
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 22:21:21 by enja              #+#    #+#             */
-/*   Updated: 2021/11/19 19:12:23 by enja             ###   ########.fr       */
+/*   Updated: 2023/04/29 14:23:06 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,6 @@ int	ft_atoi(const char *str)
 	sign = 1;
 	value = 0;
 	range = 0;
-	while ((*str == ' ' || *str == '\f') || (*str == '\n' || *str == '\r')
-		|| (*str == '\t' || *str == '\v'))
-		str++;
-	if (*str == '-')
-		sign = -1;
-	if (*str == '-' || *str == '+')
-		++str;
 	while (*str >= '0' && *str <= '9')
 	{
 		value = value * 10 + (*str - '0');
