@@ -6,7 +6,7 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 19:42:19 by enja              #+#    #+#             */
-/*   Updated: 2023/04/30 21:51:05 by enja             ###   ########.fr       */
+/*   Updated: 2023/05/01 15:30:31 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,6 @@ int	main(int ac, char **av)
 	side_c = malloc(1 * sizeof(t_side_c));
 	elements = init_data_null(elements, side_f, side_c);
 	elements = pars_data(tab, elements);
-	//system("leaks cub3D");
+	system("leaks cub3D");
 	
 }

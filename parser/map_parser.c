@@ -6,7 +6,7 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:00:25 by enja              #+#    #+#             */
-/*   Updated: 2023/04/30 22:07:20 by enja             ###   ########.fr       */
+/*   Updated: 2023/05/01 22:23:33 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,29 @@ char	**check_remove(char **map)
 
 void	check_walls(char **map)
 {
-	int	n;
-	int	i;
+	int		i;
+	char	*temp;
 
-	i = 0;
-	n = 0;
-	while (map[i])
+	i = -1;
+	while (map[++i])
 	{
-		if (map[i][0] != '1' || map[i][ft_strlen(map[i]) - 1] != '1')
+		temp = manage_spaces(map[i], 98);
+		if (temp[0] != '1' || map[i][ft_strlen(map[i]) - 1] != '1')
 			error_msg(4);
-		i++;
+		free(temp);
 	}
-	while (map[n])
-		printf("%s\n", map[n++]);
+	i = -1;
+	while (map[0][++i])
+	{
+		if (!(map[0][i] == ' ' || map[0][i] == '1'))
+			error_msg(4);
+	}
+	i = -1;
+	while (map[tdm(map) - 1][++i])
+	{
+		if (!(map[tdm(map) - 1][i] == ' ' || map[tdm(map) - 1][i] == '1'))
+			error_msg(4);
+	}
 }
 
 t_elements	*pars_map(t_elements *elements)
@@ -56,5 +66,7 @@ t_elements	*pars_map(t_elements *elements)
 	i = 0;
 	elements->map = check_remove(elements->map);
 	check_walls(elements->map);
+	//check_content(elements->map);
 	return (elements);
 }
+//// separate getchar and get_tab in a library
