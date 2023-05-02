@@ -32,7 +32,7 @@ int				ft_isdigit(int a);
 int				ft_isalnum(int a);
 int				ft_tolower(int a);
 int				ft_toupper(int a);
-size_t			ft_strlen(const char *s);
+int 			ft_strlen(const char *s);
 char			*ft_strdup(const char *s1);
 char			*ft_strchr(const char *s, int c);
 char			*ft_strrchr(const char *s, int c);

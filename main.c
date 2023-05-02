@@ -136,6 +136,5 @@ int	main(int ac, char **av)
 	side_c = malloc(1 * sizeof(t_side_c));
 	elements = init_data_null(elements, side_f, side_c);
 	elements = pars_data(tab, elements);
-	system("leaks cub3D");
-	
+	//system("leaks cub3D");
 }

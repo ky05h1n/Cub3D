@@ -68,5 +68,7 @@ int			ascii_toint(const char *str);
 t_elements	*pars_map(t_elements *elements);
 char		**check_remove(char **map);
 void		check_walls(char **map);
+void		check_holes(char **map, int i, int n);
+int			hole_dir(char c, int sig);
 
 #endif

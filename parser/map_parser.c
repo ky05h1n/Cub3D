@@ -59,6 +59,59 @@ void	check_walls(char **map)
 	}
 }
 
+int	hole_dir(char c, int sig)
+{
+	if (sig == 1)
+	{
+		if (c == ' ' || c == '\t')
+			return (1);
+		return (0);
+	}
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
+
+void	check_holes(char **map, int i, int n)
+{
+	if (ft_strlen(map[i - 1]) - 1 <= n || ft_strlen(map[i + 1]) - 1 <= n)
+		error_msg(4);
+	if (hole_dir(map[i - 1][n], 1) || hole_dir(map[i + 1][n], 1))
+		error_msg(4);
+	if (hole_dir(map[i - 1][n - 1], 1) || hole_dir(map[i - 1][n + 1], 1))
+		error_msg(4);
+	if (hole_dir(map[i + 1][n - 1], 1) || hole_dir(map[i + 1][n + 1], 1))
+		error_msg(4);
+	if (hole_dir(map[i][n - 1], 1) || hole_dir(map[i][n + 1], 1) || \
+		hole_dir(map[i][n - 1], 1) || hole_dir (map[i][n + 1], 1))
+		error_msg(4);
+}
+
+void	check_content(char **map)
+{
+	int	i;
+	int	n;
+	int	dir;
+
+	i = 1;
+	dir = 0;
+	while (map[i])
+	{
+		n = 1;
+		while (map[i][n])
+		{
+			if (map[i][n] == '0' || hole_dir(map[i][n], 98))
+				check_holes(map, i, n);
+			if (hole_dir(map[i][n], 98))
+				dir++;
+			n++;
+		}
+		i++;
+	}
+	if (dir != 1)
+		error_msg(4);
+}
+
 t_elements	*pars_map(t_elements *elements)
 {
 	int	i;
@@ -66,7 +119,7 @@ t_elements	*pars_map(t_elements *elements)
 	i = 0;
 	elements->map = check_remove(elements->map);
 	check_walls(elements->map);
-	//check_content(elements->map);
+	check_content(elements->map);
 	return (elements);
 }
 //// separate getchar and get_tab in a library
