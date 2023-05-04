@@ -6,11 +6,11 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 15:02:34 by enja              #+#    #+#             */
-/*   Updated: 2021/12/02 18:07:50 by enja             ###   ########.fr       */
+/*   Updated: 2023/05/04 21:34:24 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/fonctions.h"
 
 static char	*zy_extstr(char const *s, int start, int len)
 {

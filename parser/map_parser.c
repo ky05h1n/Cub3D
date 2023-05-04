@@ -6,11 +6,11 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:00:25 by enja              #+#    #+#             */
-/*   Updated: 2023/05/01 22:23:33 by enja             ###   ########.fr       */
+/*   Updated: 2023/05/04 20:52:43 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/includes.h"
+#include "../headers/includes.h"
 
 char	**check_remove(char **map)
 {
@@ -59,19 +59,6 @@ void	check_walls(char **map)
 	}
 }
 
-int	hole_dir(char c, int sig)
-{
-	if (sig == 1)
-	{
-		if (c == ' ' || c == '\t')
-			return (1);
-		return (0);
-	}
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (1);
-	return (0);
-}
-
 void	check_holes(char **map, int i, int n)
 {
 	if (ft_strlen(map[i - 1]) - 1 <= n || ft_strlen(map[i + 1]) - 1 <= n)
@@ -104,6 +91,8 @@ void	check_content(char **map)
 				check_holes(map, i, n);
 			if (hole_dir(map[i][n], 98))
 				dir++;
+			if (hole_dir(map[i][n], 23))
+				error_msg(4);
 			n++;
 		}
 		i++;
@@ -120,6 +109,7 @@ t_elements	*pars_map(t_elements *elements)
 	elements->map = check_remove(elements->map);
 	check_walls(elements->map);
 	check_content(elements->map);
+	while (elements->map[i])
+		printf("%s\n", elements->map[i++]);
 	return (elements);
 }
-//// separate getchar and get_tab in a library

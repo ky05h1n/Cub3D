@@ -1,37 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strnstr.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 22:19:51 by enja              #+#    #+#             */
-/*   Updated: 2021/11/22 22:12:12 by enja             ###   ########.fr       */
+/*   Created: 2023/05/04 18:37:18 by enja              #+#    #+#             */
+/*   Updated: 2023/05/04 18:41:51 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/includes.h"
 
-char	*ft_strnstr(const char *str, const char *tofind, size_t len)
-{
-	size_t	idx;
-	size_t	zy;
-	char	*typstr;
+int	ft_strncmp(char *s1, char *s2, int n)
 
-	idx = 0;
-	typstr = (char *)str;
-	if (ft_strlen(tofind) == 0)
-		return (typstr);
-	while (str[idx] && idx < len)
+{	
+	int	i;
+
+	if (n == 0)
+		return (0);
+	i = 0;
+	while ((s1[i] || s2[i]) && (i < n))
 	{
-		zy = 0;
-		while (typstr[idx + zy] == tofind[zy] && idx + zy < len)
-		{
-			if (tofind[zy + 1] == '\0')
-				return (&typstr[idx]);
-			zy++;
-		}
-		idx++;
+		if (s1[i] != s2[i])
+			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
+		i++;
 	}
-	return (NULL);
+	return (0);
 }

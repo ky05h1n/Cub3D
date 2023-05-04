@@ -1,77 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   elm_utils.c                                        :+:      :+:    :+:   */
+/*   parsing_helpers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:04:40 by enja              #+#    #+#             */
-/*   Updated: 2023/04/30 18:40:09 by enja             ###   ########.fr       */
+/*   Updated: 2023/05/04 20:55:20 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/includes.h"
+#include "../headers/includes.h"
 
-int	tdm(char **arr)
+void	error_msg(int sig)
 {
-	int	a;
-
-	if (!arr || arr[0] == NULL)
-		return (0);
-	a = 0;
-	while (arr[a] != NULL)
-		a++;
-	return (a);
-}
-
-char	*get_char(char *str, char c)
-{
-	char	*strnw;
-	int		i;
-
-	i = 0;
-	if (!str)
-	{
-		str = malloc (sizeof(char) * 2);
-		str[0] = c;
-		str[1] = '\0';
-		return (str);
-	}
-	strnw = malloc((ft_strlen(str) + 2) * sizeof(char));
-	while (str[i])
-	{
-		strnw[i] = str[i];
-		i++;
-	}
-	strnw[i++] = c;
-	strnw[i] = '\0';
-	free(str);
-	return (strnw);
-}
-
-char	**get_tab(char **cmd_table, char *newcmd)
-{
-	int		i;
-	char	**newtable;
-
-	i = 0;
-	if (!cmd_table)
-	{
-		cmd_table = malloc(2 * sizeof(char *));
-		cmd_table[0] = newcmd;
-		cmd_table[1] = NULL;
-		return (cmd_table);
-	}
-	newtable = malloc((tdm(cmd_table) + 2) * sizeof(char *));
-	while (cmd_table[i])
-	{
-		newtable[i] = cmd_table[i];
-		i++;
-	}
-	newtable[i++] = newcmd;
-	newtable[i] = NULL;
-	free(cmd_table);
-	return (newtable);
+	if (sig == 1)
+		printf("Few Or Many Arguments !\n");
+	if (sig == 2)
+		printf("Wrong Extention !\n");
+	if (sig == 3)
+		printf("No Such Map File !\n");
+	if (sig == 4)
+		printf("Map Data Error !\n");
+	//system("leaks cub3D");
+	exit(1);
 }
 
 t_elements	*init_data_null(t_elements *elmnt, t_side_f *f, t_side_c *c)
@@ -85,6 +37,47 @@ t_elements	*init_data_null(t_elements *elmnt, t_side_f *f, t_side_c *c)
 	elmnt->sid_f = f;
 	elmnt->sid_c = c;
 	return (elmnt);
+}
+
+int	ascii_toint(char *str)
+{
+	int	value;
+	int	range;
+
+	value = 0;
+	range = 0;
+	while (*str >= '0' && *str <= '9')
+	{
+		value = value * 10 + (*str - '0');
+		str++;
+		range++;
+		if (range >= 4)
+			error_msg(4);
+	}
+	if (value > 255)
+		error_msg(4);
+	return (value);
+}
+
+int	hole_dir(char c, int sig)
+{
+	if (sig == 1)
+	{
+		if (c == ' ' || c == '\t')
+			return (1);
+		return (0);
+	}
+	if (sig == 23)
+	{
+		if (c == '0' || c == '1' || c == 'N' || c == ' ' \
+			|| c == 'S' || c == 'E' || c == 'W' || c == '\t')
+			return (0);
+		return (1);
+	}
+	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	else
+		return (0);
 }
 
 void	check_extention(char *path, int sig)

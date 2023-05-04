@@ -6,11 +6,11 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:12:08 by enja              #+#    #+#             */
-/*   Updated: 2023/04/30 21:43:15 by enja             ###   ########.fr       */
+/*   Updated: 2023/05/04 22:07:42 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/includes.h"
+#include "../headers/includes.h"
 
 t_elements	*set_data_colors(t_elements *elements)
 {
@@ -27,6 +27,7 @@ t_elements	*set_data_colors(t_elements *elements)
 	elements->sid_c->c_r = ascii_toint(check_num(rgb_c[0]));
 	elements->sid_c->c_g = ascii_toint(check_num(rgb_c[1]));
 	elements->sid_c->c_b = ascii_toint(check_num(rgb_c[2]));
+	free(rgb_f);
 	return (elements);
 }
 
@@ -103,9 +104,23 @@ t_elements	*check_elements(char **tab, t_elements *elm)
 
 t_elements	*pars_data(char **tab, t_elements *elements)
 {
+	int		i;
+	int		n;
+
+	i = 0;
+	n = 0;
 	if (tdm(tab) < 9)
 		error_msg(4);
 	elements = check_elements(tab, elements);
+	while (elements->f[i++])
+		if (elements->f[i] == ',')
+			n++;
+	i = 0;
+	while (elements->c[i++])
+		if (elements->c[i] == ',')
+			n++;
+	if (n > 4)
+		error_msg(4);
 	elements = set_data_colors(elements);
 	elements->map = &tab[6];
 	elements = pars_map(elements);

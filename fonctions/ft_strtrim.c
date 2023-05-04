@@ -6,11 +6,11 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 21:04:57 by enja              #+#    #+#             */
-/*   Updated: 2023/04/30 16:34:39 by enja             ###   ########.fr       */
+/*   Updated: 2023/05/04 17:34:39 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/fonctions.h"
 
 static char	*zy_extract(char *s, int start, int len)
 {

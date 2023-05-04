@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/23 15:25:08 by enja              #+#    #+#             */
-/*   Updated: 2021/12/04 18:41:55 by enja             ###   ########.fr       */
+/*   Created: 2023/05/04 18:38:15 by enja              #+#    #+#             */
+/*   Updated: 2023/05/04 18:46:44 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/fonctions.h"
 
-char	*ft_substr(const char *str, unsigned int start, size_t len)
+char	*ft_strdup(char *s1)
+
 {
-	char			*s;
-	char			*p;
-	unsigned int	i;
-	unsigned int	j;
-	size_t			s_len;
+	int		i;
+	int		j;
+	char	*p;
 
-	s = (char *)str;
 	i = 0;
-	j = 0;
-	if (!str)
-		return (NULL);
-	s_len = ft_strlen(str);
-	if (start >= s_len)
-		len = 0;
-	if (len >= s_len)
-		len = s_len - start;
-	p = (char *) malloc (len * sizeof(char) + 1);
+	while (s1[i])
+		i++;
+	p = malloc (i + 1 * sizeof(char));
 	if (!p)
 		return (NULL);
-	while (s[i] != '\0' && j < len)
+	else
 	{
-		p[j++] = s[start + i++];
+		j = 0;
+		while (j < i)
+		{
+			p[j] = s1[j];
+			j++;
+		}
 	}
 	p[j] = '\0';
 	return (p);
