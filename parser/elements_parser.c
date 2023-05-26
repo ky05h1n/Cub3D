@@ -6,7 +6,7 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:12:08 by enja              #+#    #+#             */
-/*   Updated: 2023/05/04 22:07:42 by enja             ###   ########.fr       */
+/*   Updated: 2023/05/07 23:23:34 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ t_elements	*set_data_colors(t_elements *elements)
 {
 	char	**rgb_f;
 	char	**rgb_c;
+	int		i;
 
+	i = -1;
 	rgb_f = ft_split(elements->f, ',');
 	rgb_c = ft_split(elements->c, ',');
 	if (tdm(rgb_f) != 3 || tdm(rgb_c) != 3)
@@ -27,7 +29,13 @@ t_elements	*set_data_colors(t_elements *elements)
 	elements->sid_c->c_r = ascii_toint(check_num(rgb_c[0]));
 	elements->sid_c->c_g = ascii_toint(check_num(rgb_c[1]));
 	elements->sid_c->c_b = ascii_toint(check_num(rgb_c[2]));
+	while (rgb_f[++i])
+		free(rgb_f[i]);
+	i = -1;
+	while (rgb_c[++i])
+		free(rgb_c[i]);
 	free(rgb_f);
+	free(rgb_c);
 	return (elements);
 }
 

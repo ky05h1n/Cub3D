@@ -6,7 +6,7 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 19:42:19 by enja              #+#    #+#             */
-/*   Updated: 2023/05/04 20:14:24 by enja             ###   ########.fr       */
+/*   Updated: 2023/05/20 17:25:36 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,18 @@ int	scan_line(char *str, int count)
 	while (str[i] && count < 5)
 	{
 		if (str[i] == ' ' || str[i] == '\t')
-			error_msg(1);
+			error_msg(4);
 		i++;
 	}
 	return (0);
 }
 
-char	**get_elements(int fd)
+char	**get_elements(int fd, char **tab)
 {
 	char	*str;
-	char	**tab;
 	int		count;
 
 	count = -1;
-	tab = NULL;
 	str = get_next_line(fd);
 	while (str)
 	{
@@ -68,7 +66,12 @@ char	**get_elements(int fd)
 				tab = get_tab(tab, str);
 			}
 		}
-		if (count > 5)
+		else if (count < 6 && scan_line(str, count) == 0)
+		{
+			free(str);
+			str = NULL;
+		}
+		if (count > 5 && str)
 			tab = get_tab(tab, str);
 		str = get_next_line(fd);
 	}
@@ -94,10 +97,14 @@ int	main(int ac, char **av)
 	t_side_c	*side_c;
 
 	parameter_analyzer(ac, av, &fd);
-	tab = get_elements(fd);
+	tab = NULL;
+	tab = get_elements(fd, tab);
+	if (!tab)
+		return (0);
 	elements = malloc(1 * sizeof(t_elements));
 	side_f = malloc(1 * sizeof(t_side_f));
 	side_c = malloc(1 * sizeof(t_side_c));
 	elements = init_data_null(elements, side_f, side_c);
 	elements = pars_data(tab, elements);
+	// system("leaks cub3D");
 }

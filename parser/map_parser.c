@@ -6,7 +6,7 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/30 15:00:25 by enja              #+#    #+#             */
-/*   Updated: 2023/05/04 20:52:43 by enja             ###   ########.fr       */
+/*   Updated: 2023/05/20 17:21:39 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,13 @@ void	check_content(char **map)
 
 t_elements	*pars_map(t_elements *elements)
 {
-	int	i;
+	// int	i;
 
-	i = 0;
+	// i = 0;
 	elements->map = check_remove(elements->map);
 	check_walls(elements->map);
 	check_content(elements->map);
-	while (elements->map[i])
-		printf("%s\n", elements->map[i++]);
+	// while (elements->map[i])
+	// 	printf("%s\n", elements->map[i++]);
 	return (elements);
 }

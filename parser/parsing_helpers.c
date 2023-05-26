@@ -6,7 +6,7 @@
 /*   By: enja <enja@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/26 12:04:40 by enja              #+#    #+#             */
-/*   Updated: 2023/05/04 20:55:20 by enja             ###   ########.fr       */
+/*   Updated: 2023/05/20 17:22:15 by enja             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	error_msg(int sig)
 		printf("No Such Map File !\n");
 	if (sig == 4)
 		printf("Map Data Error !\n");
-	//system("leaks cub3D");
+	// system("leaks cub3D");
 	exit(1);
 }
 
